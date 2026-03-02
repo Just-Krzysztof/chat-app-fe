@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { LoginInput, loginSchema } from './schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { apiFetch } from '@/lib/api/apiFetch'
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
   const {
@@ -10,14 +13,27 @@ export const LoginForm = () => {
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
   })
+  const router = useRouter()
+  const loginMutation = useMutation({
+    mutationFn: (data: LoginInput) =>
+      apiFetch('auth/login', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    onSuccess: data => {
+      console.log('Zalogowano', data)
+      router.push('/')
+    },
+    onError: (err: unknown) => {
+      if (err instanceof Error) {
+        console.error('Login error:', err.message)
+      } else {
+        console.error('Login error:', err)
+      }
+    },
+  })
 
-  const onSubmit = async (data: LoginInput) => {
-    try {
-      console.log(data)
-    } catch (err) {
-      console.error(err)
-    }
-  }
+  const onSubmit = async (data: LoginInput) => loginMutation.mutate(data)
 
   return (
     <form
