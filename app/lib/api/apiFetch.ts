@@ -9,10 +9,12 @@ export const apiFetch = async (url: string, options: RequestInit = {}) => {
       ...(options.headers || {}),
     },
   })
+  const data = await res.json().catch(() => ({}))
+
   if (!res.ok) {
-    const errData = await res.json().catch(() => ({}))
-    throw new Error(errData.message || 'API Error')
+    console.error(data.message || 'API Error')
+    throw new Error(data.message || 'API Error')
   }
 
-  return res.json()
+  return data
 }

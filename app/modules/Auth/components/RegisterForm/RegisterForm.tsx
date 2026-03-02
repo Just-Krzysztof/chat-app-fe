@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { RegisterInput, registerSchema } from './schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import { apiFetch } from '@/lib/api/apiFetch'
 
 export const RegisterForm = () => {
   const {
@@ -9,13 +12,28 @@ export const RegisterForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) })
 
-  const onSubmit = async (data: RegisterInput) => {
-    try {
-      console.log(data)
-    } catch (err) {
-      console.error(err)
-    }
-  }
+  const router = useRouter()
+
+  const registerMutation = useMutation({
+    mutationFn: (data: RegisterInput) =>
+      apiFetch('auth/register', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    onSuccess: data => {
+      console.log('Zarejestrowano', data)
+      router.push('/')
+    },
+    onError: (err: unknown) => {
+      if (err instanceof Error) {
+        console.error('Register error:', err.message)
+      } else {
+        console.error('Register error:', err)
+      }
+    },
+  })
+
+  const onSubmit = async (data: RegisterInput) => registerMutation.mutate(data)
 
   return (
     <>
