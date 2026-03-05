@@ -6,3 +6,9 @@ export const createChat = (userId: string) => {
     method: 'POST',
   })
 }
+// TODO add types
+export const loadMessages = (conversationId: string, cursor?: string) => {
+  const query = cursor ? `?cursor=${cursor}` : ''
+
+  return apiFetch(`conversations/${conversationId}/messages${query}`)
+}

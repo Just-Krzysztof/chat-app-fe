@@ -1,19 +1,19 @@
 import { ChatInput } from '@/modules/Chat/components/ChatInput/ChatInput'
 import { ChatParams } from './types'
-import { ChatMessage } from '@/modules/Chat/components/ChatMessage/ChatMessage'
+import { ChatMessages } from '@/modules/Chat/components/ChatMessages/ChatMessages'
 
 export default async function Page({
   params,
 }: {
   params: Promise<ChatParams>
 }) {
-  const { chatId } = await params
+  const { conversationId } = await params
 
   return (
     <>
-      <div>Chat ID: {chatId}</div>
+      <div>Chat ID: {conversationId}</div>
       <div className="w-full flex flex-col items-center">
-        <ChatMessage />
+        <ChatMessages conversationId={conversationId} />
         <ChatInput />
       </div>
     </>
