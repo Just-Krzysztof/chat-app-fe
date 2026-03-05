@@ -1,3 +1,3 @@
 export type ChatParams = {
-  userId: string
+  chatId: string
 }
