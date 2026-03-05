@@ -1,6 +1,9 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
 
-export const apiFetch = async (url: string, options: RequestInit = {}) => {
+export const apiFetch = async <T>(
+  url: string,
+  options: RequestInit = {}
+): Promise<T> => {
   const res = await fetch(`${API_URL}/${url}`, {
     ...options,
     credentials: 'include',
@@ -12,7 +15,6 @@ export const apiFetch = async (url: string, options: RequestInit = {}) => {
   const data = await res.json().catch(() => ({}))
 
   if (!res.ok) {
-    console.error(data.message || 'API Error')
     throw new Error(data.message || 'API Error')
   }
 

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { UsersList } from '@/modules/UsersLIst/UsersList'
 const Dashboard: React.FC = () => {
   const router = useRouter()
 
@@ -16,6 +17,7 @@ const Dashboard: React.FC = () => {
           </button>
         </li>
       </ul>
+      <UsersList />
     </div>
   )
 }

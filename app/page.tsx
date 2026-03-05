@@ -1,5 +1,6 @@
 // app/page.tsx
 import { cookies } from 'next/headers'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {
@@ -12,8 +13,7 @@ export default async function Page() {
 
   return (
     <div>
-      <pre>{session}</pre>
-      Landing / login link
+      <Link href={'login'}>login</Link>
     </div>
   )
 }
