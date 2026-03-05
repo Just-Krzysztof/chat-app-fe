@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { UsersList } from '@/modules/UsersLIst/UsersList'
+import { UsersList } from '@/modules/UsersList/UsersList'
 const Dashboard: React.FC = () => {
   const router = useRouter()
 

@@ -7,11 +7,11 @@ export default async function Page({
 }: {
   params: Promise<ChatParams>
 }) {
-  const { chatId } = await params
+  const { userId } = await params
 
   return (
     <>
-      <div>Chat ID: {chatId}</div>
+      <div>Chat ID: {userId}</div>
       <div className="w-full flex flex-col items-center">
         <ChatMessage />
         <ChatInput />
