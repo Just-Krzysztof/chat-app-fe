@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { AppWrapper } from './components/AppWrapper/AppWrapper'
+import { SocketProvider } from './components/SocketProvider/SocketProvider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,7 +31,9 @@ export default function RootLayout({
       >
         <header>Header</header>
         <AppWrapper>
-          <main>{children}</main>
+          <SocketProvider>
+            <main>{children}</main>
+          </SocketProvider>
         </AppWrapper>
         <footer>Footer</footer>
       </body>

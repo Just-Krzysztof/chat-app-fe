@@ -14,7 +14,7 @@ export default async function Page({
       <div>Chat ID: {conversationId}</div>
       <div className="w-full flex flex-col items-center">
         <ChatMessages conversationId={conversationId} />
-        <ChatInput />
+        <ChatInput conversationId={conversationId} />
       </div>
     </>
   )

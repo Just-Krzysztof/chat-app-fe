@@ -14,7 +14,7 @@ export const useMessages = (conversationId: string) => {
       console.log(lastPage)
       if (lastPage.length <= 0) return undefined
 
-      return lastPage[lastPage - 1].id
+      return lastPage[lastPage.length - 1]?.id
     },
     enabled: !!conversationId,
   })
