@@ -8,8 +8,10 @@ export const useCreateChat = () => {
 
   return useMutation({
     mutationFn: (userId: string) => createChat(userId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['new-chat'] })
+    onSuccess: newChat => {
+      queryClient.setQueryData(['current-chat'], newChat)
+
+      queryClient.invalidateQueries({ queryKey: ['chats'] })
     },
   })
 }

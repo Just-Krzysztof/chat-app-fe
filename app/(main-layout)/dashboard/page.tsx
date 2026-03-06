@@ -1,22 +1,11 @@
 'use client'
 import React from 'react'
-import { useRouter } from 'next/navigation'
 import { UsersList } from '@/modules/UsersList/UsersList'
+import { Chat } from '@/modules/Chat/Chat'
 const Dashboard: React.FC = () => {
-  const router = useRouter()
-
-  const goToChat = (id: string) => {
-    router.push(`/chat/${id}`)
-  }
   return (
     <div className="w-full flex justify-center gap-[80px]">
-      <ul>
-        <li>
-          <button onClick={() => goToChat('1')} className="cursor-pointer">
-            Chat 1
-          </button>
-        </li>
-      </ul>
+      <Chat />
       <UsersList />
     </div>
   )

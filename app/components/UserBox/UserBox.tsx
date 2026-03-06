@@ -1,13 +1,11 @@
 import { useCreateChat } from '@/modules/Chat/hooks/useCreateChat'
 import { useUsersList } from '@/modules/UsersList/hooks/useUsersList'
 import { User } from '@/modules/UsersList/types/type'
-import { useRouter } from 'next/navigation'
 import { FaCircle } from 'react-icons/fa6'
 
 export const UserBox = () => {
   const { data } = useUsersList()
   const { mutateAsync: createChatMutate } = useCreateChat()
-  const route = useRouter()
 
   const showName = (user: User) => {
     if (!user.firstName && !user.lastName) return user.email
@@ -15,8 +13,7 @@ export const UserBox = () => {
   }
 
   const openChat = async (userId: string) => {
-    const chat = await createChatMutate(userId)
-    if (chat.id) return route.push(`chat/${chat.id}`)
+    await createChatMutate(userId)
   }
 
   return (

@@ -23,7 +23,6 @@ export const ChatMessages = ({ conversationId }: TMessageProps) => {
     useMessages(conversationId)
 
   const messages = data?.pages.flat() ?? []
-
   useEffect(() => {
     const socket = getSocket()
     socket.emit('join-conversation', conversationId)
